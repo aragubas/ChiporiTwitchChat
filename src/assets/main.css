@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "HobbertChiporiText";
+  src: url("HobbertChiporiText-Regular.otf");
+}
+
+body {
+  margin: 0px;
+  /* overflow: hidden; */
+}
+
+h1,
+p {
+  margin: 0px;
+}
