@@ -33,9 +33,13 @@ const chiporiFont = ref(true);
 const endFlash = ref(false);
 let ceiraProcess = 0;
 let sinasInterval = 0;
-const ID = random(10);
 
 function mountedAnimation() {
+  if (typeof messageContent.value != "string") {
+    console.error("Could not animate. messageContent is a not a string.");
+    console.debug(typeof messageContent.value);
+    return;
+  }
   setTimeout(() => {
     sinasInterval = setInterval(() => {
       messageContent.value = replaceChar(messageContent.value, random(1), ceiraProcess);
@@ -66,8 +70,6 @@ function mountedAnimation() {
 
 onMounted(() => {
   mountedAnimation();
-  let ceira = document.getElementById(this.$refs.)[0];
-  console.log(ceira);
 });
 </script>
 

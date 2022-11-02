@@ -14,7 +14,7 @@ const twitchJs = new TwitchJs({
 const messages = ref(new Array<MessageInstance>());
 
 twitchJs.chat.on("PRIVMSG", (message) => {
-  messages.value.push(new MessageInstance(message.username, message.message, (message.tags as any).color));
+  messages.value.push(new MessageInstance(message.username, message.message, (message.tags as any).color, (message.tags as any).emotes));
 });
 
 twitchJs.chat.connect().then(async () => {
