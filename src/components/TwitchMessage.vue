@@ -2,34 +2,24 @@
 import FancyTextEffectComponent from "./FancyTextEffect.vue";
 import MessageInstance, { Emote } from "../Models/MessageInstance";
 import { onBeforeMount, onMounted, ref } from "vue";
+import { randomString } from "@/utils";
 
 const props = defineProps({
   message: { type: MessageInstance, required: true },
 });
 
-const random = (length = 8) => {
-  // Declare all characters
-  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-  // Pick characers randomly
-  let str = "";
-  for (let i = 0; i < length; i++) {
-    str += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-
-  return str;
-};
-
 const events = defineEmits(["messageTimeout"]);
-const ID = ref(random(10));
+const ID = ref(randomString(10));
 
 class MessagePiece {
   isEmote: boolean;
   content: string;
+  index: number;
 
-  constructor(isEmote: boolean, content: string) {
+  constructor(isEmote: boolean, content: string, index: number) {
     this.isEmote = isEmote;
     this.content = content;
+    this.index = index;
   }
 }
 
@@ -48,11 +38,14 @@ function replaceChar(origString: string, replaceChar: string, index: number): st
 
 onBeforeMount(() => {
   if (props.message.emotes.length == 0) {
-    messagePieces.push(new MessagePiece(false, props.message.content));
+    for (let i = 0; i < props.message.content.length; i++) {
+      messagePieces.push(new MessagePiece(false, props.message.content[i], i));
+    }
   } else {
     let fullText = props.message.content;
     let nextEnd = -1;
     let latch = false;
+    let textMerge = "";
 
     for (let i = 0; i < fullText.length; i++) {
       let ceiraFind = props.message.emotes.find((ceira) => {
@@ -63,8 +56,7 @@ onBeforeMount(() => {
       });
 
       if (ceiraFind != null) {
-        console.log("Insert emote");
-        messagePieces.push(new MessagePiece(true, `https://static-cdn.jtvnw.net/emoticons/v2/${ceiraFind.id}/default/light/1.0`));
+        messagePieces.push(new MessagePiece(true, `https://static-cdn.jtvnw.net/emoticons/v2/${ceiraFind.id}/default/light/1.0`, i));
 
         nextEnd = ceiraFind.end;
 
@@ -80,10 +72,8 @@ onBeforeMount(() => {
         continue;
       }
 
-      messagePieces.push(new MessagePiece(false, fullText[i]));
+      messagePieces.push(new MessagePiece(false, fullText[i], i));
     }
-
-    props.message.emotes.reverse().forEach((emote, index) => {});
   }
 });
 
@@ -99,7 +89,7 @@ onMounted(() => {
   <article>
     <h1 :id="ID">{{ message.author }}</h1>
     <span v-for="piece in messagePieces">
-      <FancyTextEffectComponent v-if="!piece.isEmote" :message="piece.content"></FancyTextEffectComponent>
+      <FancyTextEffectComponent v-if="!piece.isEmote" :message="piece.content" :index="piece.index"></FancyTextEffectComponent>
       <img v-if="piece.isEmote" :src="piece.content" />
     </span>
   </article>
@@ -108,7 +98,7 @@ onMounted(() => {
 <style scoped>
 .font-chipori {
   font-family: "HobbertChiporiText";
-  font-size: 1.3rem;
+  /* font-size: 1.3rem; */
   font-weight: bold;
 }
 
@@ -121,7 +111,7 @@ article h1 {
   display: inline;
   margin-right: 0.25rem;
   font-size: 1rem;
-  font-family: "Ubuntu";
+  font-family: Papyrus;
   align-self: flex-start;
   padding: 1px;
 }
@@ -138,11 +128,5 @@ article h1 {
 .flash-end {
   animation-name: text-flash;
   animation-duration: 2s;
-}
-
-article p {
-  display: inline;
-  font-family: "Inter";
-  word-wrap: break-word;
 }
 </style>

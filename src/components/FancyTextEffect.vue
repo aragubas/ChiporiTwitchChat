@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { randomString } from "../utils";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
   message: { type: String, required: true },
+  index: { type: Number, required: true },
 });
 
 const emit = defineEmits(["animationComplete"]);
@@ -14,19 +16,6 @@ function replaceChar(origString: string, replaceChar: string, index: number): st
   let newString = firstPart + replaceChar + lastPart;
   return newString;
 }
-
-const random = (length = 8) => {
-  // Declare all characters
-  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-  // Pick characers randomly
-  let str = "";
-  for (let i = 0; i < length; i++) {
-    str += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-
-  return str;
-};
 
 const messageContent = ref(props.message);
 const chiporiFont = ref(true);
@@ -42,30 +31,30 @@ function mountedAnimation() {
   }
   setTimeout(() => {
     sinasInterval = setInterval(() => {
-      messageContent.value = replaceChar(messageContent.value, random(1), ceiraProcess);
-      ceiraProcess++;
+      messageContent.value = replaceChar(messageContent.value, randomString(1), ceiraProcess);
 
-      if (ceiraProcess > props.message.length) {
+      ceiraProcess++;
+      if (ceiraProcess == 1) {
         ceiraProcess = 0;
         chiporiFont.value = false;
-        clearInterval(sinasInterval);
 
+        clearInterval(sinasInterval);
         setTimeout(() => {
           sinasInterval = setInterval(() => {
             messageContent.value = replaceChar(messageContent.value, props.message.substring(ceiraProcess, ceiraProcess + 1), ceiraProcess);
             ceiraProcess++;
 
-            if (ceiraProcess > props.message.length) {
+            if (ceiraProcess == 1) {
               clearInterval(sinasInterval);
               endFlash.value = true;
 
               emit("animationComplete");
             }
-          }, (props.message.length / 1000) * 100);
-        }, 100);
+          }, props.index * 10);
+        }, 20);
       }
-    }, (props.message.length / 1000) * 100);
-  }, 2000);
+    }, props.index * 10);
+  }, 2600);
 }
 
 onMounted(() => {
@@ -80,12 +69,21 @@ onMounted(() => {
 <style scoped>
 .font-chipori {
   font-family: "HobbertChiporiText";
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 @keyframes text-flash {
   from {
-    text-shadow: 0px 0px 5px rgba(0, 255, 0, 0.5);
+    text-shadow: 0px 0px 5px rgba(0, 255, 0, 1);
+  }
+  to {
+    text-shadow: 0px 0px 0px transparent;
+  }
+}
+
+@keyframes text-flame {
+  from {
+    text-shadow: 0px 0px 5px rgba(255, 145, 0, 1);
   }
   to {
     text-shadow: 0px 0px 0px transparent;
@@ -97,9 +95,15 @@ onMounted(() => {
   animation-duration: 2s;
 }
 
+.flash-flame {
+  animation-name: text-flame;
+  animation-duration: 2s;
+}
+
 p {
   display: inline;
-  font-family: "Inter";
+  font-family: Papyrus;
+  font-weight: bold;
   word-wrap: break-word;
 }
 </style>
