@@ -15,11 +15,13 @@ class MessagePiece {
   isEmote: boolean;
   content: string;
   index: number;
+  timeScale: number;
 
-  constructor(isEmote: boolean, content: string, index: number) {
+  constructor(isEmote: boolean, content: string, index: number, timeScale: number = 0) {
     this.isEmote = isEmote;
     this.content = content;
     this.index = index;
+    this.timeScale = timeScale;
   }
 }
 
@@ -37,9 +39,20 @@ function replaceChar(origString: string, replaceChar: string, index: number): st
 // messagePieces.push(new MessagePiece(true, `https://static-cdn.jtvnw.net/emoticons/v2/${emote.id}/default/light/1.0`));
 
 onBeforeMount(() => {
+  let timeScale = 10;
+
+  if (props.message.content.length < 40) {
+    timeScale = 20;
+  } else if (props.message.content.length > 200) {
+    timeScale = 1;
+  }
+
+  console.debug(props.message.content.length);
+  console.debug(timeScale);
+
   if (props.message.emotes.length == 0) {
     for (let i = 0; i < props.message.content.length; i++) {
-      messagePieces.push(new MessagePiece(false, props.message.content[i], i));
+      messagePieces.push(new MessagePiece(false, props.message.content[i], i, timeScale));
     }
   } else {
     let fullText = props.message.content;
@@ -72,7 +85,7 @@ onBeforeMount(() => {
         continue;
       }
 
-      messagePieces.push(new MessagePiece(false, fullText[i], i));
+      messagePieces.push(new MessagePiece(false, fullText[i], i, timeScale));
     }
   }
 });
@@ -89,7 +102,7 @@ onMounted(() => {
   <article>
     <h1 :id="ID">{{ message.author }}</h1>
     <span v-for="piece in messagePieces">
-      <FancyTextEffectComponent v-if="!piece.isEmote" :message="piece.content" :index="piece.index"></FancyTextEffectComponent>
+      <FancyTextEffectComponent v-if="!piece.isEmote" :message="piece.content" :index="piece.index" :time-scale="piece.timeScale"></FancyTextEffectComponent>
       <img v-if="piece.isEmote" :src="piece.content" />
     </span>
   </article>
@@ -114,6 +127,7 @@ article h1 {
   font-family: Papyrus;
   align-self: flex-start;
   padding: 1px;
+  user-select: none;
 }
 
 @keyframes text-flash {

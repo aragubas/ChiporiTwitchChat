@@ -21,7 +21,7 @@ function createMessage(username: string, message: string, tags: any) {
     messages.value = messages.value.filter((element) => {
       return element.id != messageInstance.id;
     });
-  }, 10000);
+  }, 50000);
 }
 
 twitchJs.chat.on("PRIVMSG", (message) => {
