@@ -96,6 +96,7 @@ onMounted(() => {
 p {
   display: inline;
   font-family: Papyrus;
+  font-size: 0.9rem;
   font-weight: bold;
   word-wrap: break-word;
   user-select: none;

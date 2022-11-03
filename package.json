@@ -1,6 +1,11 @@
 {
   "name": "chiporitwitchchat",
   "version": "0.0.0",
+  "author": {
+    "name": "Aragubas",
+    "email": "dpaulootavio5@outlook.com",
+    "url": "https://aragubas.github.io"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
