@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { randomStringLowercase, replaceChar } from "../utils";
+import { isAlphaNumeric, randomStringLowercase, replaceChar } from "../utils";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -49,7 +49,7 @@ function mountedAnimation() {
 }
 
 onMounted(() => {
-  if (messageContent.value != " ") {
+  if (messageContent.value != " " && isAlphaNumeric(messageContent.value)) {
     mountedAnimation();
   }
 });

@@ -31,3 +31,7 @@ export function replaceChar(origString: string, replaceChar: string, index: numb
   let newString = firstPart + replaceChar + lastPart;
   return newString;
 }
+
+export function isAlphaNumeric(str: string): boolean {
+  return str.match(/^[a-z0-9]+$/i) !== null;
+}
