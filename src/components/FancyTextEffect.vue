@@ -56,7 +56,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <p :class="[chiporiFont ? 'font-chipori' : 'font-inter', endFlash ? 'flash-end' : '']">{{ messageContent }}</p>
+  <p :class="[chiporiFont ? 'font-chipori' : '', endFlash ? 'flash-end' : '']">{{ messageContent }}</p>
 </template>
 
 <style scoped>
@@ -71,30 +71,16 @@ p {
 
 @keyframes text-flash {
   from {
-    text-shadow: 0px 0px 5px rgba(0, 255, 0, 1);
+    color: rgba(55, 200, 55, 1);
   }
   to {
-    text-shadow: var(--text-shadow);
-  }
-}
-
-@keyframes text-flame {
-  from {
-    text-shadow: 0px 0px 5px rgba(255, 145, 0, 1);
-  }
-  to {
-    text-shadow: var(--text-shadow);
+    color: white;
   }
 }
 
 .flash-end {
   animation-name: text-flash;
-  animation-duration: 2s;
-}
-
-.flash-flame {
-  animation-name: text-flame;
-  animation-duration: 2s;
+  animation-duration: 0.25s;
 }
 
 p {

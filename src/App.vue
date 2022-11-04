@@ -17,11 +17,11 @@ function createMessage(username: string, message: string, tags: any) {
   let messageInstance = new MessageInstance(username + ":", message, (tags as any).color, (tags as any).emotes);
   messages.value.push(messageInstance);
 
-  // setTimeout(() => {
-  //   messages.value = messages.value.filter((element) => {
-  //     return element.id != messageInstance.id;
-  //   });
-  // }, 50000);
+  setTimeout(() => {
+    messages.value = messages.value.filter((element) => {
+      return element.id != messageInstance.id;
+    });
+  }, 50000);
 }
 
 twitchJs.chat.on("PRIVMSG", (message) => {

@@ -133,18 +133,4 @@ article h1 {
   user-select: none;
   text-shadow: var(--text-shadow);
 }
-
-@keyframes text-flash {
-  from {
-    text-shadow: 0px 0px 5px rgba(0, 255, 0, 0.5);
-  }
-  to {
-    text-shadow: 0px 0px 0px transparent;
-  }
-}
-
-.flash-end {
-  animation-name: text-flash;
-  animation-duration: 2s;
-}
 </style>
