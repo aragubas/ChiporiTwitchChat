@@ -17,11 +17,11 @@ function createMessage(username: string, message: string, tags: any) {
   let messageInstance = new MessageInstance(username + ":", message, (tags as any).color, (tags as any).emotes);
   messages.value.push(messageInstance);
 
-  setTimeout(() => {
-    messages.value = messages.value.filter((element) => {
-      return element.id != messageInstance.id;
-    });
-  }, 50000);
+  // setTimeout(() => {
+  //   messages.value = messages.value.filter((element) => {
+  //     return element.id != messageInstance.id;
+  //   });
+  // }, 50000);
 }
 
 twitchJs.chat.on("PRIVMSG", (message) => {
@@ -29,20 +29,18 @@ twitchJs.chat.on("PRIVMSG", (message) => {
 });
 
 twitchJs.chat.connect().then(async () => {
-  await twitchJs.chat.join("#luciditygear");
+  await twitchJs.chat.join("#aragubas_");
   createMessage("System", "Welcome to Chat!", { color: "rgb(255, 0, 0)", emotes: [] });
 });
 </script>
 
 <template>
   <div class="messages-container">
-    <ol>
-      <TransitionGroup name="messages" tag="div">
-        <li v-for="message in messages" :key="message.id">
-          <TwitchMessageComponent :message="message"></TwitchMessageComponent>
-        </li>
-      </TransitionGroup>
-    </ol>
+    <TransitionGroup name="messages" tag="ol">
+      <li v-for="message in messages" :key="message.id">
+        <TwitchMessageComponent :message="message"></TwitchMessageComponent>
+      </li>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -66,7 +64,7 @@ twitchJs.chat.connect().then(async () => {
 
 ol {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.1rem;
   flex-direction: column;
   list-style: none;
   margin: 0px;

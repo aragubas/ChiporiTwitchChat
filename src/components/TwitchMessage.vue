@@ -116,8 +116,11 @@ onMounted(() => {
 }
 
 article {
-  gap: 0.5rem;
+  gap: 0.25rem;
   box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.1rem;
+  border-radius: 4px;
 }
 
 article h1 {
@@ -128,6 +131,7 @@ article h1 {
   align-self: flex-start;
   padding: 1px;
   user-select: none;
+  text-shadow: var(--text-shadow);
 }
 
 @keyframes text-flash {

@@ -65,12 +65,16 @@ onMounted(() => {
   /* font-size: 1.25rem; */
 }
 
+p {
+  --text-shadow: 1px 1px 1px black;
+}
+
 @keyframes text-flash {
   from {
     text-shadow: 0px 0px 5px rgba(0, 255, 0, 1);
   }
   to {
-    text-shadow: 0px 0px 0px transparent;
+    text-shadow: var(--text-shadow);
   }
 }
 
@@ -79,7 +83,7 @@ onMounted(() => {
     text-shadow: 0px 0px 5px rgba(255, 145, 0, 1);
   }
   to {
-    text-shadow: 0px 0px 0px transparent;
+    text-shadow: var(--text-shadow);
   }
 }
 
@@ -100,5 +104,8 @@ p {
   font-weight: bold;
   word-wrap: break-word;
   user-select: none;
+  color: white;
+
+  text-shadow: var(--text-shadow);
 }
 </style>
