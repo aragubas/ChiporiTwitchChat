@@ -72,11 +72,11 @@ ol[data-v-b4627ba1] {
 }
 @font-face {
   font-family: HobbertChiporiText;
-  src: url(./assets/HobbertChiporiText-Regular.dce06b86.otf);
+  src: url(./HobbertChiporiText-Regular.dce06b86.otf);
 }
 @font-face {
   font-family: Papyrus;
-  src: url(./assets/Papyrus.895fdea7.ttf);
+  src: url(./Papyrus.895fdea7.ttf);
 }
 :root {
   --text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
