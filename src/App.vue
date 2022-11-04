@@ -7,7 +7,7 @@ import { onMounted, ref } from "vue";
 
 const twitchJs = new TwitchJs({
   username: "ChiporiChat",
-  token: "oauth:tmrrqkavhxtpg07lx9wiymjw6kyeli",
+  token: "oauth:oxfpnjqybpz4r3ul95uatcs65ckpgo",
   clientId: "",
 });
 
