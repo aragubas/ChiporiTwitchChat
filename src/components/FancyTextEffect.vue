@@ -66,7 +66,7 @@ onMounted(() => {
 }
 
 p {
-  --text-shadow: 1px 1px 1px black;
+  --text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 @keyframes text-flash {

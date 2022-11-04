@@ -21,7 +21,7 @@ function createMessage(username: string, message: string, tags: any) {
     messages.value = messages.value.filter((element) => {
       return element.id != messageInstance.id;
     });
-  }, 50000);
+  }, 10000);
 }
 
 twitchJs.chat.on("PRIVMSG", (message) => {
@@ -29,7 +29,7 @@ twitchJs.chat.on("PRIVMSG", (message) => {
 });
 
 twitchJs.chat.connect().then(async () => {
-  await twitchJs.chat.join("#aragubas_");
+  await twitchJs.chat.join("#luciditygear");
   createMessage("System", "Welcome to Chat!", { color: "rgb(255, 0, 0)", emotes: [] });
 });
 </script>
