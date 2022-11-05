@@ -47,7 +47,7 @@ twitchJs.chat.connect().then(async () => {
 <style scoped>
 .messages-container {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
 }

@@ -47,22 +47,22 @@ article h1[data-v-1981c9bf] {
   user-select: none;
   text-shadow: var(--text-shadow);
 }
-.messages-container[data-v-b4627ba1] {
+.messages-container[data-v-b8513c35] {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
 }
-.messages-enter-active[data-v-b4627ba1],
-.messages-leave-active[data-v-b4627ba1] {
+.messages-enter-active[data-v-b8513c35],
+.messages-leave-active[data-v-b8513c35] {
   transition: all 0.5s ease;
 }
-.messages-enter-from[data-v-b4627ba1],
-.messages-leave-to[data-v-b4627ba1] {
+.messages-enter-from[data-v-b8513c35],
+.messages-leave-to[data-v-b8513c35] {
   opacity: 0;
   transform: translate(30px);
 }
-ol[data-v-b4627ba1] {
+ol[data-v-b8513c35] {
   display: flex;
   gap: 0.1rem;
   flex-direction: column;
